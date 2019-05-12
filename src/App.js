@@ -5,9 +5,9 @@ import Person from "./Person/Person";
 class App extends Component {
   state = {
     persons: [
-      { name: "Austin", age: 24 },
-      { name: "Mallory", age: 22 },
-      { name: "Dylan", age: 26 }
+      { id: "asfa1", name: "Austin", age: 24 },
+      { id: "vasdf1", name: "Mallory", age: 22 },
+      { id: "asdf11", name: "Dylan", age: 26 }
     ],
     otherState: "some other value",
     showPersons: false
@@ -17,6 +17,7 @@ class App extends Component {
     /**
      * In order to not manipulate the state directly
      * make a copy of the state using slice() w/o an argument
+     * replace the slice with the spread operator
      */
     // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
@@ -25,14 +26,28 @@ class App extends Component {
     this.setState({ persons: persons });
   };
 
-  nameChangedHandler = event => {
-    this.setState({
-      persons: [
-        { name: "Austin", age: 24 },
-        { name: event.target.value, age: 22 },
-        { name: "Dylan", age: 27 }
-      ]
+  nameChangedHandler = (event, id) => {
+    /**
+     * findIndex, similar to map, goes through each element
+     * executes a fn for each el in the array
+     */
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
     });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    // below is an alternative to the spread operator above
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({ persons: persons });
   };
 
   togglePersonsHandler = () => {
@@ -61,6 +76,8 @@ class App extends Component {
                 click={() => this.deletePersonHandler(index)}
                 name={person.name}
                 age={person.age}
+                key={person.id}
+                changed={event => this.nameChangedHandler(event, person.id)}
               />
             );
           })}
