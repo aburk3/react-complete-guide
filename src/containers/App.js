@@ -23,9 +23,9 @@ class App extends Component {
     return state;
   }
 
-  componentWillMount() {
-    console.log("[App.js] componentWillMount");
-  }
+  // componentWillMount() {
+  //   console.log("[App.js] componentWillMount");
+  // }
 
   componentDidMount() {
     console.log("[App.js] componentDidMount");
