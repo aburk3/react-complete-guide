@@ -8,6 +8,7 @@ class App extends Component {
     super(props);
     console.log("[App.js] constructor");
   }
+
   state = {
     persons: [
       { id: "asfa1", name: "Austin", age: 24 },
@@ -29,6 +30,15 @@ class App extends Component {
 
   componentDidMount() {
     console.log("[App.js] componentDidMount");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js] shouldComponentUpdate");
+    return true;
+  }
+
+  componentDidUpdate(nextProps, nextState) {
+    console.log("[App.js] comonentDidUpdate");
   }
 
   deletePersonHandler = personIndex => {
