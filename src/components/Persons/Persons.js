@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Person from "./Person/Person";
 
-class Persons extends Component {
+class Persons extends PureComponent {
   // static getDerivedStateFromProps(props, state) {
   //   console.log("[Persons.js] getDerivedStateFromProps");
   //   return state;
@@ -11,20 +11,24 @@ class Persons extends Component {
   //   console.log("[Persons.js] componentWillReceiveProps", props);
   // }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("[Persons.js] shouldComponentUpdate");
-    /**
-     * .persons is an obj, therefore a reference type
-     * this would not work if we weren't creating a new copy in app.js
-     * */
-    // only update if the props for this particular comp have changed
-    if (nextProps.persons !== this.props.persons) {
-      return true;
-    } else {
-      return false;
-    }
-    // when this component is re-rendered, we update
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("[Persons.js] shouldComponentUpdate");
+  /**
+   * .persons is an obj, therefore a reference type
+   * this would not work if we weren't creating a new copy in app.js
+   * */
+  // only update if the props for this particular comp have changed
+  // if (
+  //   nextProps.persons !== this.props.persons ||
+  //   nextProps.changed !== this.props.changed ||
+  //   nextProps.clicked !== this.props.clicked
+  // ) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+  // when this component is re-rendered, we update
+  // }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log("[Persons.js] getSnapshotBeforeUpdate");
