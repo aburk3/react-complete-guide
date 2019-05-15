@@ -13,7 +13,17 @@ class Persons extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log("[Persons.js] shouldComponentUpdate");
-    return true;
+    /**
+     * .persons is an obj, therefore a reference type
+     * this would not work if we weren't creating a new copy in app.js
+     * */
+    // only update if the props for this particular comp have changed
+    if (nextProps.persons !== this.props.persons) {
+      return true;
+    } else {
+      return false;
+    }
+    // when this component is re-rendered, we update
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
