@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## About this project
+This project was build following the awesome tutorial: React - The Complete Guide (incl Hooks, React Router, Redux) by Maximilian Schwarzmüller
+
 ## Available Scripts
 
 In the project directory, you can run:
