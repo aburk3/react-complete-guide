@@ -1,14 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from "./Cockpit.module.css";
 
 const Cockpit = props => {
+  const toggleBtnRef = useRef(null);
+
   // useEffect is componentDidMount and componentDidUpdate in one effect
   useEffect(() => {
     console.log("[Cockpit.js] useEffect");
     // Http request...
-    setTimeout(() => {
-      alert("Saved data to cloud!");
-    }, 1000);
+    // setTimeout(() => {
+    //   alert("Saved data to cloud!");
+    // }, 1000);
+    /**
+     * toggleBtnRef must be in useEffect because
+     * .current is null until it is set below on
+     * the actual button
+     */
+    toggleBtnRef.current.click();
     return () => {
       // runs the last time, since [] means only run once, this will run the first time
       console.log("[Cockpit.js] cleanup work in useEffect");
@@ -40,7 +48,7 @@ const Cockpit = props => {
     <div className={classes.Cockpit}>
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(" ")}>This is really working!</p>
-      <button className={btnClass} onClick={props.clicked}>
+      <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>
         Toggle Persons
       </button>
     </div>
